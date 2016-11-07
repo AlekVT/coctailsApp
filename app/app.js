@@ -8,15 +8,15 @@ angular.module('App', ['ngRoute'])
       templateUrl: 'assets/views/home.html',
       controller: 'homeCtrl'
     })
+    .when('/category:category_id', {
+    	templateUrl: 'assets/views/category.html',
+    	controller: 'categoryCtrl'
+    })
+    .when('/coctail:coctail_id', {
+    	templateUrl: 'assets/views/coctail.html',
+    	controller: 'coctailCtrl'
+    })
     .otherwise({
       redirectTo: '/home'
     });
 })
-
-.config(function($compileProvider) {
-  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|sms):/);
-})
-
-.controller('homeCtrl', ['$scope', function homeCtrl($scope) {
-  
-}])

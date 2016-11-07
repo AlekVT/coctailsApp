@@ -1,0 +1,9 @@
+<div class="jumbotron">
+  <h1 class="display-3">Category</h1>
+  <p class="lead">All coctails in {{category}}</p>
+  <hr class="m-y-2">
+  <p ng-repeat="cocktail in cocktails" ng-click="cocktailClick(cocktail.coc_id)">{{cocktail.name}}</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  </p>
+</div>
