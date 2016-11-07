@@ -5,6 +5,7 @@ let oCategories = [];
 let sCategory = "default";
 let oCocktails = [];
 let oCocktail = [];
+let oLikes = [];
 
 angular.module('App')
 
@@ -26,6 +27,8 @@ angular.module('App')
 		},
 		fetchCocktails: function() {
 			return $.getJSON(
+					// de fatsoenlijke manier
+					//sDataBaseAddress + '_design/views/_view/cocktails?key=' + id
 				sDataBaseAddress + '_design/views/_view/cocktails',
 				function (oData) {
 					oCocktails = oData.rows;
@@ -43,17 +46,47 @@ angular.module('App')
 		getCocktails: function() {
 			let aTemp = [];
 			for (let i = 0; i < oCocktails.length; i++) {
-				aTemp.push(oCocktails[i].value);
+				if (oCocktails[i].value.cat_id == sCategory.cat_id) {
+					aTemp.push(oCocktails[i].value);
+				}
 			}
 			return aTemp;
 		},
-		fetchCocktail: function() {
+		fetchCocktail: function(id) {
 			return $.getJSON(
-				sDataBaseAddress + '',
-				function() {
-					//something happens here.
+				sDataBaseAddress + '_design/views/_view/cocktails',
+				function(oData) {
+					for (let i = 0; i < oData.rows.length; i++) {
+						if (oData.rows[i].value.coc_id == id) {
+							oCocktail = oData.rows[i];
+						}
+					}
 				}
 			);
+		},
+		fetchLikes: function(id) {
+			return $.getJSON(
+					sDataBaseAddress + '_design/views/_view/likes?key=' + id,
+					function(oData) {
+						oLikes = oData.rows;
+					}
+				);
+		}
+	};
+})
+
+.factory('cocktailSrv', function() {
+	return {
+		getCocktail: function() {
+			console.log(oCocktail);
+			return oCocktail.value;
+		},
+		getLikes() {
+			let aTemp = [];
+			for (let i = 0; i < oLikes.length; i++) {
+				aTemp.push(oLikes[i].value);
+			}
+			return aTemp;
 		}
 	};
 })

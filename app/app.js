@@ -12,9 +12,9 @@ angular.module('App', ['ngRoute'])
     	templateUrl: 'assets/views/category.html',
     	controller: 'categoryCtrl'
     })
-    .when('/coctail:coctail_id', {
-    	templateUrl: 'assets/views/coctail.html',
-    	controller: 'coctailCtrl'
+    .when('/cocktail:cocktail_id', {
+    	templateUrl: 'assets/views/cocktail.html',
+    	controller: 'cocktailCtrl'
     })
     .otherwise({
       redirectTo: '/home'

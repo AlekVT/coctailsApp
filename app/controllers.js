@@ -28,6 +28,15 @@ angular.module('App')
 	$scope.category = categoriesSrv.getCategoryName().name;
 	$scope.cocktails = categoriesSrv.getCocktails();
 	$scope.cocktailClick = function(id) {
-		
+		categoriesSrv.fetchCocktail(id).then(function() {
+			categoriesSrv.fetchLikes(id).then(function() {
+				window.location.replace("#/cocktail.html");
+			})
+		})
 	}
+}])
+
+.controller('cocktailCtrl', ['$scope', 'cocktailSrv', function cocktailCtrl($scope, cocktailSrv) {
+	$scope.cocktail = cocktailSrv.getCocktail();
+	$scope.people = cocktailSrv.getLikes();
 }])
